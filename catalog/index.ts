@@ -38,6 +38,10 @@ export type DivisionRef =
   | { kind: "part"; number: number }
   | { kind: "epilogue" };
 
+export type DivisionOutline =
+  | { kind: "part"; number: number; chapters: number[] }
+  | { kind: "epilogue"; chapters: number[] };
+
 export type PlaceRef = {
   slug: string;
   division: DivisionRef;
@@ -359,6 +363,20 @@ export function createCatalog(books: Book[]) {
     getBook(slug: string): ListedBook | undefined {
       const book = findBook(slug);
       return book ? listed(book) : undefined;
+    },
+
+    listDivisions(slug: string): DivisionOutline[] | undefined {
+      const book = findBook(slug);
+      if (!book) {
+        return undefined;
+      }
+      return book.divisions.map((division, divisionIndex) => {
+        const ref = divisionRefAt(book, divisionIndex);
+        const chapters = division.chapters.map((place) => place.chapter);
+        return ref.kind === "epilogue"
+          ? { kind: "epilogue" as const, chapters }
+          : { kind: "part" as const, number: ref.number, chapters };
+      });
     },
 
     resolvePlace(

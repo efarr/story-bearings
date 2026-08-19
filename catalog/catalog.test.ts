@@ -99,6 +99,17 @@ describe("Book catalog", () => {
     expect(catalog.getBook("missing")).toBeUndefined();
   });
 
+  test("lists Divisions and chapter numbers for a Book", () => {
+    const catalog = createCatalog([book]);
+
+    expect(catalog.listDivisions("a-dense-novel")).toEqual([
+      { kind: "part", number: 1, chapters: [1, 2] },
+      { kind: "part", number: 2, chapters: [1] },
+      { kind: "epilogue", chapters: [1, 2] },
+    ]);
+    expect(catalog.listDivisions("missing")).toBeUndefined();
+  });
+
   test("resolves a Place by Book slug, Division, and chapter", () => {
     const catalog = createCatalog([book]);
 
