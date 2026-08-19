@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Bearings, DivisionOutline, ListedBook, PlaceRef } from "@/catalog";
 import { RememberPlace } from "@/components/RememberPlace";
 import { PlacePicker } from "@/components/PlacePicker";
-import { placeHref } from "@/lib/place";
+import { completeRosterHref, placeHref } from "@/lib/place";
 
 function PlaceLinks({
   previous,
@@ -36,6 +36,24 @@ function PlaceLinks({
         <span />
       )}
     </nav>
+  );
+}
+
+function CompleteRosterLink({ slug }: { slug: string }) {
+  return (
+    <p className="font-sans text-xs leading-relaxed text-[#9a8e80]">
+      <Link
+        href={completeRosterHref(slug)}
+        prefetch={false}
+        className="underline underline-offset-2"
+      >
+        Complete roster
+      </Link>
+      {" — "}
+      names the whole Book&apos;s key people and their final roles, including
+      people and roles you may not have met. Opening it leaves spoiler-safe
+      Bearings.
+    </p>
   );
 }
 
@@ -127,15 +145,21 @@ export function BearingsPage({
           </div>
         </main>
 
-        <aside className="px-6 pb-8 sm:px-8 lg:sticky lg:top-0 lg:h-screen lg:overflow-y-auto lg:border-l lg:border-[#d9cfc0] lg:px-5 lg:py-6">
+        <aside className="px-6 pb-8 sm:px-8 lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col lg:overflow-y-auto lg:border-l lg:border-[#d9cfc0] lg:px-5 lg:py-6">
           <h2 className="font-sans text-[0.7rem] tracking-[0.22em] text-[#7a6f62] uppercase">
             Roster
           </h2>
           <RosterList roster={bearings.roster} />
+          <div className="mt-10 hidden lg:mt-auto lg:block lg:pt-8">
+            <CompleteRosterLink slug={book.slug} />
+          </div>
         </aside>
 
         <div className="px-6 pb-28 sm:px-8 lg:hidden">
           <PlaceLinks previous={previous} next={next} />
+          <div className="mt-10">
+            <CompleteRosterLink slug={book.slug} />
+          </div>
         </div>
       </div>
     </div>

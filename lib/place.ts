@@ -25,6 +25,10 @@ export function placeHref(place: PlaceRef): string {
   return `/${place.slug}/${divisionSegment(place.division)}/${place.chapter}`;
 }
 
+export function completeRosterHref(slug: string): string {
+  return `/${slug}/complete-roster`;
+}
+
 export function divisionLabel(division: DivisionOutline | DivisionRef): string {
   return division.kind === "epilogue" ? "Epilogue" : `Part ${division.number}`;
 }
