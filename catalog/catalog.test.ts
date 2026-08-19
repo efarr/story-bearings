@@ -394,12 +394,12 @@ describe("Crime and Punishment fixture", () => {
     ).toBeUndefined();
   });
 
-  test("returns stub Bearings at a Place", () => {
+  test("returns Bearings at a Place", () => {
     const bearings = catalog.bearings("crime-and-punishment", part1, 1);
 
     expect(bearings?.label).toBe("Part 1, Chapter 1");
     expect(bearings?.orientation.length).toBeGreaterThan(0);
-    expect(bearings?.roster[0]?.name).toBe("Raskolnikov");
+    expect(bearings?.roster[0]?.name).toBe("Rodion Romanovitch Raskolnikov");
     expect(
       catalog.bearings("crime-and-punishment", epilogue, 2)?.label,
     ).toBe("Epilogue, Chapter 2");
