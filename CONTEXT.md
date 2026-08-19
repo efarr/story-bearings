@@ -13,8 +13,8 @@ A novel the site covers, authored into the repository at design time.
 _Avoid_: title, work (when meaning a covered novel)
 
 **Division**:
-A part or the epilogue of a Book, containing ordered chapters.
-_Avoid_: section, book (when meaning a part)
+An ordered grouping of Places in a Book. A Division may be labeled — such as a part, volume, prologue, or epilogue — or unlabeled when the Book has no larger grouping.
+_Avoid_: section, book (when meaning a Division)
 
 **Person**:
 A key figure in a Book. Walk-ons are not Persons; they appear only in orientation prose.
@@ -29,11 +29,11 @@ Containing only what the Book's text has already shown or said through the Reade
 _Avoid_: spoiler-free
 
 **Place**:
-The chapter the Reader has read through: a part-and-chapter, or epilogue-and-chapter, of a Book.
+An ordered reading unit the Reader has read through, usually a chapter, carrying the label used to match the Book.
 _Avoid_: progress, bookmark, chapter number (alone)
 
 **Bearings**:
-The spoiler-safe page at a Place: part-and-chapter label, orientation prose, and Roster.
+The spoiler-safe page at a Place: Place label, orientation prose, and Roster.
 _Avoid_: recap, study guide, chapter summary (when naming this page)
 
 **Roster**:
