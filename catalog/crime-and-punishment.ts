@@ -153,18 +153,6 @@ const persons: Person[] = [
     ],
   ),
   person(
-    "Pyotr Petrovitch Luzhin",
-    familyKey,
-    "the man of means Dounia once accepted and then dismissed",
-    [
-      [2, { aliases: ["Luzhin", "Pyotr Petrovitch"], role: "the man of means Dounia has accepted; he is coming to Petersburg and wants a wife who will be grateful" }],
-      [10, { aliases: ["Luzhin", "Pyotr Petrovitch"], role: "Dounia's intended, expected at the garret" }],
-      [11, { aliases: ["Luzhin", "Pyotr Petrovitch"], role: "Dounia's intended, a visitor already received in the garret" }],
-      [21, { aliases: ["Luzhin", "Pyotr Petrovitch"], role: "the man Dounia has dismissed" }],
-      [28, { aliases: ["Luzhin", "Pyotr Petrovitch"], role: "the man Dounia dismissed, now hostile to Sonia and her family" }],
-    ],
-  ),
-  person(
     "Arkady Ivanovitch Svidrigailov",
     familyKey,
     "the former householder from the provinces; he shoots himself in Petersburg",
@@ -183,6 +171,18 @@ const persons: Person[] = [
     [
       [2, { aliases: ["Marfa Petrovna"], role: "Svidrigailov's wife; she turned Dounia out and later cleared her name in the town" }],
       [20, { aliases: ["Marfa Petrovna"], role: "Svidrigailov's late wife; her death has been reported in Petersburg" }],
+    ],
+  ),
+  person(
+    "Pyotr Petrovitch Luzhin",
+    familyKey,
+    "the man of means Dounia once accepted and then dismissed",
+    [
+      [2, { aliases: ["Luzhin", "Pyotr Petrovitch"], role: "the man of means Dounia has accepted; he is coming to Petersburg and wants a wife who will be grateful" }],
+      [10, { aliases: ["Luzhin", "Pyotr Petrovitch"], role: "Dounia's intended, expected at the garret" }],
+      [11, { aliases: ["Luzhin", "Pyotr Petrovitch"], role: "Dounia's intended, a visitor already received in the garret" }],
+      [21, { aliases: ["Luzhin", "Pyotr Petrovitch"], role: "the man Dounia has dismissed" }],
+      [28, { aliases: ["Luzhin", "Pyotr Petrovitch"], role: "the man Dounia dismissed, now hostile to Sonia and her family" }],
     ],
   ),
   person(

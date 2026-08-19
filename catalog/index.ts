@@ -137,26 +137,35 @@ function labelFor(division: DivisionRef, chapter: number): string {
 }
 
 function rosterAt(book: Book, currentIndex: number): RosterEntry[] {
-  const present = book.persons.filter((person) => {
-    const keyIndex = placeOrderIndex(
-      book,
-      person.firstKey.divisionIndex,
-      person.firstKey.chapter,
-    );
-    return keyIndex !== -1 && keyIndex <= currentIndex;
-  });
+  const present = book.persons
+    .map((person, index) => ({ person, index }))
+    .filter(({ person }) => {
+      const keyIndex = placeOrderIndex(
+        book,
+        person.firstKey.divisionIndex,
+        person.firstKey.chapter,
+      );
+      return keyIndex !== -1 && keyIndex <= currentIndex;
+    });
 
   present.sort((a, b) => {
-    if (a.protagonist !== b.protagonist) {
-      return a.protagonist ? -1 : 1;
-    }
-    return (
-      placeOrderIndex(book, a.firstKey.divisionIndex, a.firstKey.chapter) -
-      placeOrderIndex(book, b.firstKey.divisionIndex, b.firstKey.chapter)
+    const aKey = placeOrderIndex(
+      book,
+      a.person.firstKey.divisionIndex,
+      a.person.firstKey.chapter,
     );
+    const bKey = placeOrderIndex(
+      book,
+      b.person.firstKey.divisionIndex,
+      b.person.firstKey.chapter,
+    );
+    if (aKey !== bKey) {
+      return bKey - aKey;
+    }
+    return b.index - a.index;
   });
 
-  return present.flatMap((person) => {
+  return present.flatMap(({ person }) => {
     const keyIndex = placeOrderIndex(
       book,
       person.firstKey.divisionIndex,

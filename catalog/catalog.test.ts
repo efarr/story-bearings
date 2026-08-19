@@ -151,15 +151,15 @@ describe("Book catalog", () => {
     ).toEqual(["Rodya"]);
     expect(
       catalog.bearings("a-dense-novel", part1, 2)?.roster.map((entry) => entry.name),
-    ).toEqual(["Rodya", "Petrovich"]);
+    ).toEqual(["Petrovich", "Rodya"]);
     expect(
       catalog.bearings("a-dense-novel", part2, 1)?.roster.map((entry) => entry.name),
-    ).toEqual(["Rodya", "Petrovich", "Dunya"]);
+    ).toEqual(["Dunya", "Petrovich", "Rodya"]);
     expect(
       catalog
         .bearings("a-dense-novel", epilogue, 2)
         ?.roster.map((entry) => entry.name),
-    ).toEqual(["Rodya", "Petrovich", "Dunya"]);
+    ).toEqual(["Dunya", "Petrovich", "Rodya"]);
   });
 
   test("rewrites each Roster line at the Place", () => {
@@ -167,25 +167,38 @@ describe("Book catalog", () => {
 
     expect(catalog.bearings("a-dense-novel", part1, 2)?.roster).toEqual([
       {
-        name: "Rodya",
-        aliases: ["the student"],
-        role: "a student who has met the official",
-      },
-      {
         name: "Petrovich",
         aliases: ["the official"],
         role: "an official Rodya has just met",
       },
+      {
+        name: "Rodya",
+        aliases: ["the student"],
+        role: "a student who has met the official",
+      },
     ]);
   });
 
-  test("orders the Roster protagonist first, then first-key", () => {
-    const catalog = createCatalog([book]);
-    const names = catalog
-      .bearings("a-dense-novel", part2, 1)
-      ?.roster.map((entry) => entry.name);
+  test("orders the Roster newest first-key first, reversing presentation in the same Place", () => {
+    const withTie = structuredClone(book);
+    withTie.persons.splice(1, 0, {
+      canonicalName: "The landlady",
+      protagonist: false,
+      firstKey: { divisionIndex: 0, chapter: 1 },
+      lines: Array.from({ length: 5 }, () => ({
+        aliases: [],
+        role: "the woman Rodya owes",
+      })),
+      finalRole: "the woman Rodya owed",
+    });
+    const catalog = createCatalog([withTie]);
 
-    expect(names).toEqual(["Rodya", "Petrovich", "Dunya"]);
+    expect(
+      catalog.bearings("a-dense-novel", part1, 1)?.roster.map((entry) => entry.name),
+    ).toEqual(["The landlady", "Rodya"]);
+    expect(
+      catalog.bearings("a-dense-novel", part2, 1)?.roster.map((entry) => entry.name),
+    ).toEqual(["Dunya", "Petrovich", "The landlady", "Rodya"]);
   });
 
   test("walks previous and next across Divisions into the epilogue with no wrap", () => {
@@ -399,7 +412,7 @@ describe("Crime and Punishment fixture", () => {
 
     expect(bearings?.label).toBe("Part 1, Chapter 1");
     expect(bearings?.orientation.length).toBeGreaterThan(0);
-    expect(bearings?.roster[0]?.name).toBe("Rodion Romanovitch Raskolnikov");
+    expect(bearings?.roster[0]?.name).toBe("Lizaveta Ivanovna");
     expect(
       catalog.bearings("crime-and-punishment", epilogue, 2)?.label,
     ).toBe("Epilogue, Chapter 2");

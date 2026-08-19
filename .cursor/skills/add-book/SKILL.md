@@ -33,6 +33,8 @@ Choose the key people and write them. There is no human gate. Walk-ons live in o
 
 Each Person: canonical name, protagonist flag, first-key Place, a Roster line at every Place from first-key through the end in Book order (aliases already used, one role/relationship sentence), and a final role.
 
+List Persons in first-presentation order (earlier in the array = presented earlier). The Roster is newest-first; same-chapter ties reverse that array order.
+
 **Done when:** every Person has first-key, a line at every later Place, and a final role, and walk-ons are not in the set.
 
 ## 5. Write
